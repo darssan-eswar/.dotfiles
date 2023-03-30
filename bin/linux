@@ -1,0 +1,20 @@
+#!/bin/bash
+
+uname
+
+if (( uname != "Linux")); then
+	echo "Error message: uname is not Linux" >> linuxsetup.log
+	exit
+fi
+
+mkdir ~/.TRASH
+
+if [ -f ~/.vimrc ]; then
+	mv .vimrc .bup_vimrc
+	echo "The current .vimrc file was renamed to .bup_vimrc" >> linuxsetup.log
+else
+	echo ".vimrc does not exist in the homedirectory"
+fi
+etc/vimrc > ~/.vimrc
+
+echo "source ~/.dotfiles/etc/bashrc custom" >> ~/.bashrc
